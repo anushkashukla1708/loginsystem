@@ -2,7 +2,7 @@ import { useState } from "react";
 import { verifyOTP } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 
-function VerifyOTP() {
+function verifyOTP() {
 
   const navigate = useNavigate();
 
@@ -72,4 +72,4 @@ function VerifyOTP() {
 
 }
 
-export default VerifyOTP;
+export default verifyOTP;

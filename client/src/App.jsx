@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import VerifyOTP from "./pages/verifyOTP";
+import verifyOTP from "./pages/verifyOTP";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -11,7 +11,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/verify-otp" element={<VerifyOTP />} />
+      <Route path="/verify-otp" element={<verifyOTP />} />
 
       <Route
         path="/dashboard"
