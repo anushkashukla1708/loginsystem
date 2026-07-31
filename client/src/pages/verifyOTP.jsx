@@ -2,8 +2,7 @@ import { useState } from "react";
 import { verifyOTP } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 
-function verifyOTP() {
-
+function VerifyOTP() {
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState("");
@@ -11,11 +10,9 @@ function verifyOTP() {
   const email = localStorage.getItem("email");
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
 
     try {
-
       const res = await verifyOTP({
         email,
         otp,
@@ -26,28 +23,19 @@ function verifyOTP() {
       alert(res.data.message);
 
       navigate("/dashboard");
-
     } catch (err) {
-
-      alert(err.response?.data?.message);
-
+      alert(err.response?.data?.message || "OTP Verification Failed");
     }
   };
 
   return (
-
     <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-purple-500 to-pink-500">
-
       <div className="bg-white p-8 rounded-xl shadow-lg w-96">
-
         <h2 className="text-3xl font-bold text-center mb-6">
-
           Verify OTP
-
         </h2>
 
         <form onSubmit={handleSubmit}>
-
           <input
             type="text"
             placeholder="Enter OTP"
@@ -56,20 +44,16 @@ function verifyOTP() {
             onChange={(e) => setOtp(e.target.value)}
           />
 
-          <button className="w-full bg-purple-600 text-white py-3 rounded">
-
+          <button
+            type="submit"
+            className="w-full bg-purple-600 text-white py-3 rounded hover:bg-purple-700"
+          >
             Verify
-
           </button>
-
         </form>
-
       </div>
-
     </div>
-
   );
-
 }
 
-export default verifyOTP;
+export default VerifyOTP;
