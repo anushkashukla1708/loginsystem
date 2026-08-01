@@ -12,14 +12,16 @@ dotenv.config();
 
 connectDB();
 
-const app = express();
+const cors = require("cors");
 
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "https://loginsystemorg.vercel.app",
+      "https://loginsystemorg-git-main-anushka-self.vercel.app",
     ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
