@@ -95,25 +95,40 @@ console.log("User found:", user);
       });
     }
 
-    // Generate 6-digit OTP
-    const otp = otpGenerator.generate(6, {
-      upperCaseAlphabets: false,
-      lowerCaseAlphabets: false,
-      specialChars: false,
-      digits: true,
-    });
+// Generate OTP
+const otp = otpGenerator.generate(6, {
+  upperCaseAlphabets: false,
+  lowerCaseAlphabets: false,
+  specialChars: false,
+  digits: true,
+});
 
-    // Save OTP
-    user.otp = otp;
-    user.otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
-    await user.save();
+console.log("Generated OTP:", otp);
 
-// Send OTP to email
-    await sendEmail(user.email, otp);
+// Save OTP
+user.otp = otp;
+user.otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
 
-    res.status(200).json({
-    success: true,
-    message: "OTP sent to your email",
+await user.save();
+
+console.log("OTP Saved");
+
+// Send Email
+try {
+  await sendEmail(user.email, otp);
+  console.log("Email Sent Successfully");
+} catch (err) {
+  console.log("EMAIL ERROR:", err);
+
+  return res.status(500).json({
+    success: false,
+    message: err.message,
+  });
+}
+
+res.status(200).json({
+  success: true,
+  message: "OTP Sent Successfully",
 });
 
   } catch (error) {

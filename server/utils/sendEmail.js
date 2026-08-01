@@ -1,27 +1,26 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (email, otp) => {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASSWORD,
-    },
-  });
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
-  const mailOptions = {
+const sendEmail = async (email, otp) => {
+  await transporter.sendMail({
     from: process.env.EMAIL,
     to: email,
     subject: "OTP Verification",
     html: `
-      <h2>MERN Authentication</h2>
-      <p>Your OTP is:</p>
+      <h2>MERN Login System</h2>
       <h1>${otp}</h1>
-      <p>This OTP is valid for 5 minutes.</p>
+      <p>This OTP expires in 5 minutes.</p>
     `,
-  };
-
-  await transporter.sendMail(mailOptions);
+  });
 };
 
 module.exports = sendEmail;
