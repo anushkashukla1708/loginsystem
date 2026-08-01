@@ -18,8 +18,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://loginsystemorg.vercel.app",
-      "https://loginsystemorg-git-main-anushka-self.vercel.app",
+      "https://loginsystem123.vercel.app",
+      "https://loginsystem123-git-main-anushka-self.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
