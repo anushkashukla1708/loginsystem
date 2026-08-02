@@ -33,10 +33,15 @@ const [showPassword, setShowPassword] = useState(false);
       navigate("/verify-otp");
 
     } catch (err) {
+  console.log("Status:", err.response?.status);
+  console.log("Response:", err.response?.data);
 
-      alert(err.response?.data?.message);
-
-    }
+  alert(
+    err.response?.data?.message ||
+    JSON.stringify(err.response?.data) ||
+    err.message
+  );
+}
   };
 
   return (
