@@ -1,9 +1,13 @@
 const nodemailer = require("nodemailer");
+const dns = require("dns");
+
+dns.setDefaultResultOrder("ipv4first");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false,
+  family: 4,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.EMAIL_PASSWORD,
@@ -17,8 +21,9 @@ const sendEmail = async (email, otp) => {
     subject: "OTP Verification",
     html: `
       <h2>MERN Login System</h2>
+      <h3>Your OTP is</h3>
       <h1>${otp}</h1>
-      <p>This OTP expires in 5 minutes.</p>
+      <p>Valid for 5 minutes.</p>
     `,
   });
 };
